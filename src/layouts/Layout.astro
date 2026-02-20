@@ -32,29 +32,48 @@ const ogImgUrl = canonicalURL + socialImage;
 <!doctype html>
 <html lang={lang} class="scroll-pt-16 scroll-smooth">
   <head>
-    <title>{finalTitle}</title>
-    <meta name="description" content={finalDescription} />
-    <meta property="og:title" content={finalTitle} />
-    <meta property="og:description" content={finalDescription} />
-    
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="author" content={author} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
 
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <title>{finalTitle}</title>
+    <meta name="description" content={finalDescription} />
+
+    <meta property="og:title" content={finalTitle} />
+    <meta property="og:description" content={finalDescription} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImgUrl} />
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
+    <meta property="twitter:title" content={finalTitle} />
+    <meta property="twitter:description" content={finalDescription} />
     <meta property="twitter:image" content={ogImgUrl} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Thirteen Games",
+      "url": "https://www.thirteengames.de",
+      "founder": {
+        "@type": "Person",
+        "name": "Dani Lipke",
+        "jobTitle": "Game Developer & Designer"
+      },
+      "description": "Independent game studio based in Cologne, Germany. Founded by Dani Lipke.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cologne",
+        "addressCountry": "DE"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/dani-lipke-066a81372/",
+        "https://github.com/Dambthirteen",
+        "https://www.youtube.com/@Thirteen-games"
+      ]
+    })} />
 
     <style>
       @view-transition {

@@ -1,9 +1,9 @@
 import type { SiteConfig, SiteContent } from "../types";
 
 export const SITE_CONFIG: SiteConfig = {
-  title: "Thirteen Games - Indie Game Studio",
+  title: "Thirteen Games - Indie Game Studio by Dani Lipke",
   author: "Thirteen Games - Dani Lipke",
-  description: "Thirteen Games - Indie Game Studio",
+  description: "Thirteen Games is an independent game studio founded by Dani Lipke in Cologne, Germany. Game Development, Sound Design, and Unity Assets.",
   lang: "de",
   navLinks: [
   {
