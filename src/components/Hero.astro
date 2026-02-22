@@ -14,21 +14,18 @@ const { name, specialty, summary } = Astro.props;
       class="absolute inset-0 w-full h-[160%] object-cover will-change-transform"
       id="parallax-banner"
     />
-    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black"></div>
 
     {/* Alles zentriert im Banner */}
     <div class="absolute inset-0 flex flex-col items-center justify-center px-6">
       <img
         src="/logo-thirteengames.png"
         alt="Thirteen Games Logo"
-        class="h-52 md:h-72 w-auto drop-shadow-2xl mb-6"
+        class="h-64 md:h-80 w-auto drop-shadow-2xl mb-6"
       />
-      <h1 class="glitch-wrapper font-serif text-4xl font-bold text-white sm:text-6xl md:text-7xl">
-        <span id="typewriter-name" class="glitch-text inline-block" data-text=""></span>
+      <p class="glitch-wrapper font-serif text-lg font-bold text-primary sm:text-xl md:text-2xl tracking-wider">
+        <span id="typewriter-specialty" class="glitch-text inline-block" data-text=""></span>
         <span class="typewriter-cursor">|</span>
-      </h1>
-      <p class="mt-3 font-serif text-lg font-bold text-primary sm:text-xl md:text-2xl tracking-wider">
-        <span id="typewriter-specialty" class="inline-block"></span>
       </p>
       <p class="mt-4 text-sm text-neutral/60">
         {summary}
@@ -109,7 +106,7 @@ const { name, specialty, summary } = Astro.props;
   }
 </style>
 
-<script define:vars={{ name, specialty }}>
+<script define:vars={{ specialty }}>
   function typeWriter(element, text, speed, callback) {
     let i = 0;
     function type() {
@@ -126,15 +123,13 @@ const { name, specialty, summary } = Astro.props;
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const nameEl = document.getElementById('typewriter-name');
     const specialtyEl = document.getElementById('typewriter-specialty');
     const cursor = document.querySelector('.typewriter-cursor');
 
-    if (nameEl && specialtyEl) {
-      typeWriter(nameEl, name, 80, () => {
+    if (specialtyEl) {
+      typeWriter(specialtyEl, specialty, 60, () => {
         if (cursor) cursor.remove();
-        nameEl.classList.add('glitch-active');
-        typeWriter(specialtyEl, specialty, 60);
+        specialtyEl.classList.add('glitch-active');
       });
     }
   });
