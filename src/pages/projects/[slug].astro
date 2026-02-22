@@ -36,17 +36,17 @@ const { name, category, description, image, gallery, techStack, linkPreview, lin
 
     {/* Links */}
     <div class="reveal reveal-up mb-12 flex gap-4" style="transition-delay: 100ms;">
+      {linkPreview && (
+        <a href={linkPreview} target="_blank" class="btn-primary">
+          {linkPreview.includes('steam') ? 'Play on Steam' : 'Live Preview'}
+        </a>
+      )}
       {linkSource && (
         <a href={linkSource} target="_blank" class="btn-outline">
-          Source Code
+          {linkSource.includes('projectsunset') ? 'ProjectSunset UG' : linkSource.includes('assetstore') ? 'Unity Asset Store' : 'Source Code'}
         </a>
       )}
-      {linkPreview && (
-        <a href={linkPreview} target="_blank" class="btn-outline">
-          Live Preview
-        </a>
-      )}
-    </div>
+</div>
 
     {/* Description */}
     <div class="reveal reveal-left prose-section mb-16" style="transition-delay: 200ms;">

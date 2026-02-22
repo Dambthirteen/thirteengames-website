@@ -99,21 +99,22 @@ export const SITE_CONTENT: SiteContent = {
     linkSource: "https://assetstore.unity.com/packages/slug/361974",
     },
     {
-      name: "Staged",
-      slug: "staged",
-      category: "Sounddesign",
-      summary: "A social network that replicates the features of Instagram",
-      info: "Sounddesign for the Indie Title 'Staged' developed by ProjectSunset UG",
-      description: `
-        <p>Staged is an indie game developed by ProjectSunset UG. Thirteen Games contributed to the sound design.</p>
-        <p>The project involved creating atmospheric sound effects, ambient soundscapes, and interactive audio elements that enhance the player experience.</p>
-        <p>Working closely with the development team, I designed audio that responds dynamically to gameplay, creating an immersive sound environment.</p>
-      `,
-      image: "/staged-keyart.png",
-      gallery: ["/staged-keyart.png"],
-      techStack: ["Ableton", "Unreal Engine"],
-      linkPreview: "https://store.steampowered.com/app/3534100/Staged/",
-    },
+    name: "Staged",
+    slug: "staged",
+    category: "Sounddesign",
+    summary: "Sounddesign for the indie title Staged by ProjectSunset UG",
+    info: "Sounddesign for the Indie Title 'Staged' developed by ProjectSunset UG",
+    description: `
+      <p>Staged is an indie game developed by ProjectSunset UG. Thirteen Games contributed to the sound design.</p>
+      <p>The project involved creating atmospheric sound effects, ambient soundscapes, and interactive audio elements that enhance the player experience.</p>
+      <p>Working closely with the development team, I designed audio that responds dynamically to gameplay, creating an immersive sound environment.</p>
+    `,
+    image: "/staged-keyart.png",
+    gallery: ["/staged-keyart.png"],
+    techStack: ["Ableton", "Unreal Engine"],
+    linkPreview: "https://store.steampowered.com/app/3534100/Staged/",
+    linkSource: "https://projectsunset.de",
+  },
   ],
   about: {
     description: `
