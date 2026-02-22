@@ -47,17 +47,17 @@ const { projects } = Astro.props;
                 </div>
               </div>
                 
-              <div class="relative px-6 py-7 border-t border-neutral/10">
-                <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-transparent"></div>
-                <div class="relative">
-                  <p class="overline mb-2 text-primary">
-                    {category}
-                  </p>
-                  <h3 class="font-serif text-2xl font-medium text-white tracking-tight">
-                    {name}
-                  </h3>
-                </div>
+              <div class="relative px-6 py-7">
+              <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-transparent"></div>
+              <div class="relative">
+                <p class="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                  {category}
+                </p>
+                <h3 class="font-serif text-3xl font-medium text-white tracking-tight">
+                  {name}
+                </h3>
               </div>
+            </div>
             </div>
           </a>
         );
