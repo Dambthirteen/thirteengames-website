@@ -15,7 +15,7 @@ const { projects } = Astro.props;
     {
       projects.map(({ name, category, info, image, slug }, index) => {
         return (
-          <a
+            <a
             href={`/projects/${slug}`}
             class="project-card block"
             style={`transition-delay: ${index * 150}ms;`}
@@ -26,13 +26,13 @@ const { projects } = Astro.props;
             >
               <div class="relative h-72 w-full overflow-hidden sm:h-80">
                 <Image
-                class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                src={image}
-                alt={name}
-                width="850"
-                height="580"
-              />
-
+                  class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                  src={image}
+                  alt={name}
+                  width="736"
+                  height="580"
+                />
+                
                 <div class="grain-overlay absolute inset-0 pointer-events-none opacity-30 mix-blend-overlay" />
 
                 <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/0 transition-all duration-400 group-hover:bg-black/95">
@@ -46,11 +46,11 @@ const { projects } = Astro.props;
                   </div>
                 </div>
               </div>
-
+                
               <div class="relative px-6 py-7 border-t border-neutral/10">
                 <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-transparent"></div>
                 <div class="relative">
-                  <p class="overline mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+                  <p class="overline mb-2 text-primary">
                     {category}
                   </p>
                   <h3 class="font-serif text-2xl font-medium text-white tracking-tight">
@@ -146,6 +146,16 @@ const { projects } = Astro.props;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-size: 128px 128px;
   }
+
+  .card-spotlight {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.5rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 10;
+  }
 </style>
 
 <script>
@@ -170,6 +180,10 @@ const { projects } = Astro.props;
   tiltCards.forEach((card) => {
     const el = card as HTMLElement;
 
+    const spotlight = document.createElement('div');
+    spotlight.className = 'card-spotlight';
+    el.appendChild(spotlight);
+
     el.addEventListener('mousemove', (e) => {
       const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -183,10 +197,14 @@ const { projects } = Astro.props;
       const pullY = ((y - centerY) / centerY) * 8;
 
       el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateX(${pullX}px) translateY(${pullY}px) scale(1.03)`;
+
+      spotlight.style.opacity = '1';
+      spotlight.style.background = `radial-gradient(350px circle at ${x}px ${y}px, rgba(149, 24, 16, 0.15), transparent 60%)`;
     });
 
     el.addEventListener('mouseleave', () => {
       el.style.transform = 'rotateX(0deg) rotateY(0deg) translateX(0px) translateY(0px) scale(1)';
+      spotlight.style.opacity = '0';
     });
   });
 </script>
