@@ -105,7 +105,7 @@ export const SITE_CONTENT: SiteContent = {
       summary: "A social network that replicates the features of Instagram",
       info: "Sounddesign for the Indie Title 'Staged' developed by ProjectSunset UG",
       description: `
-        <p>Staged is an indie game developed by ProjectSunset UG for which Thirteen Games provided the complete sounddesign.</p>
+        <p>Staged is an indie game developed by ProjectSunset UG. Thirteen Games contributed to the sound design.</p>
         <p>The project involved creating atmospheric sound effects, ambient soundscapes, and interactive audio elements that enhance the player experience.</p>
         <p>Working closely with the development team, I designed audio that responds dynamically to gameplay, creating an immersive sound environment.</p>
       `,
@@ -113,18 +113,17 @@ export const SITE_CONTENT: SiteContent = {
       gallery: ["/staged-keyart.png"],
       techStack: ["Ableton", "Unreal Engine"],
       linkPreview: "https://store.steampowered.com/app/3534100/Staged/",
-      linkSource: "https://store.steampowered.com/app/3534100/Staged/",
     },
   ],
   about: {
     description: `
-      Hi! My name is Dani, I'm a <span class="text-primary font-bold">Game Developer</span>and <span class="text-primary font-bold">Game Designer</span> as well as the founder of <span class="text-primary font-bold">Thirteen Games</span>, an independent game studio established in 2026. Game development has been my passion for years, and even while working in other fields, I always spent my free time creating and developing games.
+      Hi! My name is Dani, I'm a <span class="text-primary font-bold">Game Developer</span> and <span class="text-primary font-bold">Game Designer</span> as well as the founder of <span class="text-primary font-bold">Thirteen Games</span>, an independent game studio based in Cologne, Germany. I've been developing games for a while now — even while working in other industries, I consistently built projects in my free time.
 
-      Before founding Thirteen Games, I gained valuable experience in project management and worked as a manager of a fitness studio. This background helped me build strong leadership, organization, and communication skills, which I now bring into my work as a developer and designer.
+      Before founding Thirteen Games, I worked in project management and led a fitness studio as its manager. That experience gave me a solid foundation in <span class="text-primary font-bold">leadership, organization, and communication</span> — skills that directly translate into running a studio and shipping games.
 
-      I strongly believe that <span class="text-primary font-bold">indie games represent the future of the gaming industry</span>. My goal is to be part of that future by bringing my vision, creativity, and management experience into every project I work on. I am especially passionate about designing systems and transforming them into creative and engaging gameplay experiences that feel meaningful and memorable for players.
+      I see the indie space as one of the most important drivers of the gaming industry. <span class="text-primary font-bold">Smaller teams can take risks that larger studios can't</span>, and that's where some of the most interesting work happens. My focus is on designing systems that translate into engaging, well-crafted gameplay — the kind of experiences that stick with players.
 
-      With Thirteen Games, I aim to create unique and innovative games that stand out, inspire players, and contribute to the growing indie game community.
+      With Thirteen Games, I want to <span class="text-primary font-bold">contribute to that landscape</span> — building games that are thoughtfully designed, well-executed, and worth playing.
     `,
     image: "/BildDani.png",
   },
