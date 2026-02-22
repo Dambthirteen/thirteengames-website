@@ -373,6 +373,63 @@ const ogImgUrl = canonicalURL + socialImage;
           createParticles();
         });
       }
+
+      // ===== CURSOR TRAIL =====
+      const trailCanvas = document.getElementById('cursor-trail') as HTMLCanvasElement;
+      const trailCtx = trailCanvas?.getContext('2d');
+
+      interface TrailPoint {
+        x: number;
+        y: number;
+        age: number;
+      }
+
+      const trail: TrailPoint[] = [];
+      const maxAge = 40;
+
+      function resizeTrailCanvas() {
+        if (!trailCanvas) return;
+        trailCanvas.width = window.innerWidth;
+        trailCanvas.height = window.innerHeight;
+      }
+
+      function drawTrail() {
+        if (!trailCtx || !trailCanvas) return;
+        trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+
+        for (let i = trail.length - 1; i >= 0; i--) {
+          trail[i].age++;
+          if (trail[i].age > maxAge) {
+            trail.splice(i, 1);
+            continue;
+          }
+
+          const life = 1 - trail[i].age / maxAge;
+          const radius = life * 8;
+          const alpha = life * 0.15;
+
+          trailCtx.beginPath();
+          trailCtx.arc(trail[i].x, trail[i].y, radius, 0, Math.PI * 2);
+          trailCtx.fillStyle = `rgba(149, 24, 16, ${alpha})`;
+          trailCtx.fill();
+        }
+
+        requestAnimationFrame(drawTrail);
+      }
+
+      if (trailCanvas && trailCtx) {
+        resizeTrailCanvas();
+        window.addEventListener('resize', resizeTrailCanvas);
+
+        window.addEventListener('mousemove', (e) => {
+          trail.push({ x: e.clientX, y: e.clientY, age: 0 });
+          if (trail.length > 50) trail.shift();
+        });
+
+        drawTrail();
+      }
     </script>
+    <!-- Cursor Trail -->
+    <canvas id="cursor-trail" style="position:fixed;inset:0;z-index:9997;pointer-events:none;"></canvas>
   </body>
 </html>
