@@ -11,13 +11,12 @@ const { description, image, name, email } = Astro.props;
 <Section text="About Me" href="about">
   <div class="flex flex-col items-center gap-12 md:flex-row md:gap-8">
     <div class="w-auto md:pr-5">
-      <div class="text-base text-neutral scroll-text" id="about-text" set:html={description} />
+      <div class="text-base text-neutral" id="about-text" set:html={description} />
       <div class="mt-10">
-        <a class="btn-primary" href={"mailto:" + email}>
+      <a class="btn-primary magnetic-btn" href={"mailto:" + email}>
         Get in Touch
-        </a>
-        </a>
-      </div>
+      </a>
+    </div>
     </div>
     <div
     class="group relative h-80 w-64 flex-shrink-0 overflow-hidden rounded-lg border border-neutral/20"
@@ -39,77 +38,67 @@ const { description, image, name, email } = Astro.props;
 </Section>
 
 <style>
-  .scroll-text :global(.char) {
-    opacity: 0.2;
-    transition: opacity 0.15s ease;
-  }
-
-  .scroll-text :global(.char.is-visible) {
-    opacity: 1;
-  }
-
   .grain-overlay {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size: 128px 128px;
   }
+  
+  .magnetic-btn {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .magnetic-btn::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 9999px;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(149, 24, 16, 0.6), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .magnetic-btn:hover::before {
+    opacity: 1;
+  }
+
+  .magnetic-btn:hover {
+    box-shadow: 0 0 30px rgba(149, 24, 16, 0.4), 0 0 60px rgba(149, 24, 16, 0.2);
+  }
 </style>
 
 <script>
-  function wrapChars(el: Element) {
-    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-    const textNodes: Text[] = [];
+  const btn = document.querySelector('.magnetic-btn') as HTMLElement;
+  if (btn) {
+    const parent = btn.parentElement as HTMLElement;
 
-    while (walker.nextNode()) {
-      textNodes.push(walker.currentNode as Text);
-    }
+    parent.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const distX = e.clientX - centerX;
+      const distY = e.clientY - centerY;
 
-    textNodes.forEach((node) => {
-      const parent = node.parentNode;
-      if (!parent) return;
+      const maxDist = 120;
+      const dist = Math.sqrt(distX * distX + distY * distY);
 
-      const text = node.textContent || '';
-      const fragment = document.createDocumentFragment();
-
-      for (const char of text) {
-        if (char === ' ' || char === '\n') {
-          fragment.appendChild(document.createTextNode(char));
-        } else {
-          const span = document.createElement('span');
-          span.className = 'char';
-          span.textContent = char;
-          fragment.appendChild(span);
-        }
+      if (dist < maxDist) {
+        const pull = (1 - dist / maxDist) * 12;
+        const moveX = (distX / dist) * pull || 0;
+        const moveY = (distY / dist) * pull || 0;
+        btn.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
       }
 
-      parent.replaceChild(fragment, node);
+      const mx = ((e.clientX - rect.left) / rect.width) * 100;
+      const my = ((e.clientY - rect.top) / rect.height) * 100;
+      btn.style.setProperty('--mx', `${mx}%`);
+      btn.style.setProperty('--my', `${my}%`);
     });
-  }
 
-  const aboutText = document.getElementById('about-text');
-  if (aboutText) {
-    wrapChars(aboutText);
-
-    const chars = aboutText.querySelectorAll('.char');
-
-    function updateChars() {
-      const rect = aboutText!.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const sectionTop = rect.top;
-      const sectionHeight = rect.height;
-
-      const progress = Math.max(0, Math.min(1, (windowHeight - sectionTop) / (windowHeight + sectionHeight)));
-
-      chars.forEach((char, index) => {
-        const charThreshold = index / chars.length;
-
-        if (progress > charThreshold) {
-          char.classList.add('is-visible');
-        }
-      });
-    }
-
-    updateChars();
-    window.addEventListener('scroll', updateChars, { passive: true });
-    window.addEventListener('resize', updateChars, { passive: true });
+    parent.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0, 0) scale(1)';
+    });
   }
 </script>
