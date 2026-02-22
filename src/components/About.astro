@@ -32,7 +32,7 @@ const { description, image, name, email } = Astro.props;
       <div class="grain-overlay absolute inset-0 pointer-events-none opacity-30 mix-blend-overlay"></div>
       <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"></div>
       <div class="absolute bottom-0 left-0 px-5 pb-5">
-        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-primary">{name}</p>
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-primary">Dani Lipke — Founder</p>
       </div>
     </div>
   </div>
@@ -91,23 +91,31 @@ const { description, image, name, email } = Astro.props;
 
     const chars = aboutText.querySelectorAll('.char');
 
-    window.addEventListener('scroll', () => {
-      const rect = aboutText.getBoundingClientRect();
+    function updateChars() {
+      const rect = aboutText!.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
       const sectionTop = rect.top;
       const sectionHeight = rect.height;
 
+      const scrollStart = windowHeight;
+      const scrollEnd = -(sectionHeight * 0.3);
+      const totalRange = scrollStart - scrollEnd;
+      const currentProgress = (scrollStart - sectionTop) / totalRange;
+
       chars.forEach((char, index) => {
-        const progress = (windowHeight - sectionTop + 50) / (windowHeight + (sectionHeight * 0.5));
         const charThreshold = index / chars.length;
 
-        if (progress > charThreshold) {
+        if (currentProgress > charThreshold) {
           char.classList.add('is-visible');
         } else {
           char.classList.remove('is-visible');
         }
       });
-    }, { passive: true });
+    }
+
+    updateChars();
+    window.addEventListener('scroll', updateChars, { passive: true });
+    window.addEventListener('resize', updateChars, { passive: true });
   }
 </script>
