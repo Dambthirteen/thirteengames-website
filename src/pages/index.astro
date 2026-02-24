@@ -85,12 +85,64 @@ const ysc = SITE_CONTENT.projects.find(p => p.slug === 'you-should-choose');
 <style>
   .ysc-banner {
     height: 320px;
+    transform-style: preserve-3d;
+    will-change: transform;
+    background: linear-gradient(160deg, rgba(28, 35, 45, 0.9) 0%, rgba(14, 13, 12, 0.95) 100%);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(253, 245, 219, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .ysc-banner::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 0.6rem;
+    background: linear-gradient(var(--glow-angle, 0deg), #951810, transparent 40%, transparent 60%, #951810);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+    animation: glow-spin 4s linear infinite;
+  }
+
+  .ysc-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(149, 24, 16, 0.15);
+    transition: border-color 0.3s ease;
+    pointer-events: none;
+  }
+
+  .ysc-banner:hover::before { opacity: 1; }
+  .ysc-banner:hover::after { border-color: rgba(149, 24, 16, 0.4); }
+  .ysc-banner:hover {
+    box-shadow: 0 20px 50px rgba(149, 24, 16, 0.25), 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(253, 245, 219, 0.08);
+  }
+
+  @keyframes glow-spin {
+    0% { --glow-angle: 0deg; }
+    100% { --glow-angle: 360deg; }
+  }
+
+  @property --glow-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .ysc-spotlight {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.5rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 10;
   }
 
   @media (min-width: 640px) {
-    .ysc-banner {
-      height: 400px;
-    }
+    .ysc-banner { height: 400px; }
   }
 
   .ysc-thumb {
@@ -98,3 +150,35 @@ const ysc = SITE_CONTENT.projects.find(p => p.slug === 'you-should-choose');
     background: linear-gradient(160deg, rgba(28, 35, 45, 0.9), rgba(14, 13, 12, 0.95));
   }
 </style>
+
+<script>
+  const banner = document.querySelector('.ysc-banner') as HTMLElement;
+  if (banner) {
+    const spotlight = document.createElement('div');
+    spotlight.className = 'ysc-spotlight';
+    banner.appendChild(spotlight);
+
+    banner.addEventListener('mousemove', (e) => {
+      const rect = banner.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
+      const pullX = ((x - centerX) / centerX) * 5;
+      const pullY = ((y - centerY) / centerY) * 5;
+
+      banner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateX(${pullX}px) translateY(${pullY}px) scale(1.02)`;
+
+      spotlight.style.opacity = '1';
+      spotlight.style.background = `radial-gradient(500px circle at ${x}px ${y}px, rgba(149, 24, 16, 0.15), transparent 60%)`;
+    });
+
+    banner.addEventListener('mouseleave', () => {
+      banner.style.transform = 'rotateX(0deg) rotateY(0deg) translateX(0px) translateY(0px) scale(1)';
+      spotlight.style.opacity = '0';
+    });
+  }
+</script>
