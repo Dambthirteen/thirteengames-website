@@ -15,9 +15,11 @@ const ysc = SITE_CONTENT.projects.find(p => p.slug === 'you-should-choose');
 <Layout>
   <Hero {...SITE_CONTENT.hero} />
 
+  <div class="fog-divider"></div>
+
   {/* ===== YOU SHOULD CHOOSE — Featured Section ===== */}
   {ysc && (
-    <Section text="Featured Project" href="featured">
+    <Section text="You should choose" href="featured">
       <div class="ysc-section">
         {/* Top: Main Banner */}
         <a href={`/projects/${ysc.slug}`} class="ysc-banner group relative block overflow-hidden rounded-lg border border-neutral/20">
@@ -77,6 +79,8 @@ const ysc = SITE_CONTENT.projects.find(p => p.slug === 'you-should-choose');
       </div>
     </Section>
   )}
+
+  <div class="fog-divider"></div>
 
   {/* ===== OTHER PROJECTS ===== */}
   <Projects projects={otherProjects} />

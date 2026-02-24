@@ -110,4 +110,43 @@ button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
   border-radius: 4px;
+
+/* Fog Divider between Sections */
+.fog-divider {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.fog-divider::before,
+.fog-divider::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  top: 0;
+  left: -50%;
+  background: radial-gradient(ellipse at center, rgba(149, 24, 16, 0.06) 0%, transparent 70%),
+              radial-gradient(ellipse at 30% 50%, rgba(253, 245, 219, 0.03) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(149, 24, 16, 0.04) 0%, transparent 60%);
+  animation: fog-drift-1 12s ease-in-out infinite;
+}
+
+.fog-divider::after {
+  background: radial-gradient(ellipse at center, rgba(253, 245, 219, 0.03) 0%, transparent 65%),
+              radial-gradient(ellipse at 60% 50%, rgba(149, 24, 16, 0.05) 0%, transparent 55%),
+              radial-gradient(ellipse at 20% 50%, rgba(253, 245, 219, 0.02) 0%, transparent 70%);
+  animation: fog-drift-2 16s ease-in-out infinite;
+}
+
+@keyframes fog-drift-1 {
+  0%, 100% { transform: translateX(-5%) scaleY(1); opacity: 0.6; }
+  50% { transform: translateX(5%) scaleY(1.2); opacity: 1; }
+}
+
+@keyframes fog-drift-2 {
+  0%, 100% { transform: translateX(5%) scaleY(1.1); opacity: 0.8; }
+  50% { transform: translateX(-5%) scaleY(0.9); opacity: 0.5; }
+}
 }
