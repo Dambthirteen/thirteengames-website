@@ -9,9 +9,10 @@ import Footer from "@components/Footer.astro";
 interface Props {
   pageDescription?: string;
   pageTitle?: string;
+  fullscreen?: boolean;
 }
 
-const { pageDescription, pageTitle } = Astro.props;
+const { pageDescription, pageTitle, fullscreen = false } = Astro.props;
 
 const {
   title,
@@ -239,7 +240,7 @@ const ogImgUrl = canonicalURL + socialImage;
     </button>
 
     <Header navLinks={navLinks} />
-    <main class="mx-auto max-w-3xl px-5">
+    <main class={fullscreen ? '' : 'pt-20'}>
       <slot />
     </main>
     <Footer author={author} socialLinks={socialLinks} />

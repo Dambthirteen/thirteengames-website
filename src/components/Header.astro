@@ -9,14 +9,14 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header
-  class="sticky top-0 z-50 flex w-full animate-slide-in items-center justify-between bg-black px-5 py-4"
+  class="fixed top-0 z-50 flex w-full items-center justify-between px-6 py-4 md:px-10"
+  id="site-header"
 >
-  {/* Logo links */}
   <a href="/" class="flex items-center gap-3 transition hover:opacity-80">
     <img
       src="/logo-thirteengames-justtext-notsquared.png"
       alt="Thirteen Games"
-      class="h-15 w-auto"
+      class="h-12 w-auto"
     />
   </a>
 
@@ -31,21 +31,21 @@ const currentPath = Astro.url.pathname;
   </button>
 
   <nav
-    class="absolute top-20 right-5 hidden rounded-xl border border-neutral/40 bg-black px-4 py-5 text-neutral sm:static sm:block sm:border-0 sm:bg-transparent sm:p-0"
+    class="absolute top-20 right-5 hidden rounded-xl border border-neutral/20 bg-black/95 px-4 py-5 text-neutral backdrop-blur-md sm:static sm:block sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none"
     id="main-menu"
   >
     <ul class="gap-2 sm:flex sm:items-center">
       {
         navLinks.map((link) => {
-          const isActive = currentPath === link.href || 
+          const isActive = currentPath === link.href ||
             (link.children && link.children.some(child => currentPath === child.href));
           return (
             <li class="relative group">
               <a
                 class={`nav-item relative block p-2 text-sm font-medium transition-all duration-300 hover:text-white ${
-                  isActive 
-                    ? 'text-white after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary after:opacity-100 after:content-["•"]' 
-                    : 'text-neutral after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary after:opacity-0 after:content-["•"] hover:after:opacity-100'
+                  isActive
+                    ? 'text-white after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary after:opacity-100 after:content-["•"]'
+                    : 'text-neutral/80 after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary after:opacity-0 after:content-["•"] hover:after:opacity-100'
                 }`}
                 href={link.href}
               >
@@ -57,7 +57,7 @@ const currentPath = Astro.url.pathname;
                 )}
               </a>
               {link.children && (
-                <ul class="dropdown-menu hidden sm:block sm:invisible sm:opacity-0 sm:absolute sm:top-full sm:right-0 sm:mt-1 sm:min-w-48 sm:rounded-lg sm:border sm:border-neutral/20 sm:bg-black sm:py-2 sm:shadow-xl sm:transition-all sm:duration-200 sm:group-hover:visible sm:group-hover:opacity-100 pl-4 sm:pl-0 sm:pointer-events-none sm:group-hover:pointer-events-auto">
+                <ul class="dropdown-menu hidden sm:block sm:invisible sm:opacity-0 sm:absolute sm:top-full sm:right-0 sm:mt-1 sm:min-w-48 sm:rounded-lg sm:border sm:border-neutral/20 sm:bg-black/95 sm:py-2 sm:shadow-xl sm:backdrop-blur-md sm:transition-all sm:duration-200 sm:group-hover:visible sm:group-hover:opacity-100 pl-4 sm:pl-0 sm:pointer-events-none sm:group-hover:pointer-events-auto">
                   {link.children.map((child) => {
                     const isChildActive = currentPath === child.href;
                     return (
@@ -65,7 +65,7 @@ const currentPath = Astro.url.pathname;
                         <a
                           href={child.href}
                           class={`block px-4 py-2 text-sm transition-colors hover:text-white hover:bg-neutral/10 ${
-                            isChildActive ? 'text-white' : 'text-neutral'
+                            isChildActive ? 'text-white' : 'text-neutral/70'
                           }`}
                         >
                           {child.text}
@@ -84,6 +84,16 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
+  const header = document.getElementById('site-header');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      header?.classList.add('header-scrolled');
+    } else {
+      header?.classList.remove('header-scrolled');
+    }
+  }, { passive: true });
+
   const button = document.querySelector("#menu-button");
   const menu = document.querySelector("#main-menu");
   const navItems = document.querySelectorAll("#main-menu > ul > li > a");
@@ -92,9 +102,6 @@ const currentPath = Astro.url.pathname;
     menu?.classList.toggle("hidden");
     const isHidden = menu?.classList.contains("hidden");
     button?.setAttribute("aria-expanded", `${!isHidden}`);
-
-    const dropdowns = menu?.querySelectorAll('.dropdown-menu');
-    dropdowns?.forEach((d) => d.classList.toggle('hidden'));
   };
 
   button?.addEventListener("click", toggleMenu);
@@ -107,15 +114,21 @@ const currentPath = Astro.url.pathname;
     }
   });
 
-  const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
-  dropdownLinks.forEach((link) => {
+  document.querySelectorAll('.dropdown-menu a').forEach((link) => {
     link.addEventListener('click', toggleMenu);
   });
 </script>
 
 <style>
-  header {
-    animation-timeline: scroll();
-    animation-range: 0 650px;
+  #site-header {
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  #site-header.header-scrolled {
+    background-color: rgba(14, 13, 12, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: rgba(253, 245, 219, 0.06);
   }
 </style>
