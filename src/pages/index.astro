@@ -113,7 +113,7 @@ import "../styles/global.css";
   /* Parallax wrapper — moves via JS, no transition */
   .panel-bg-wrap {
     position: absolute;
-    inset: -18% 0;
+    inset: -11% 0;
     will-change: transform;
   }
 
@@ -309,7 +309,7 @@ import "../styles/global.css";
       const rect = panel.getBoundingClientRect();
       const center = rect.top + rect.height / 2;
       const progress = (window.innerHeight / 2 - center) / window.innerHeight;
-      wrap.style.transform = `translateY(${progress * 90}px)`;
+      wrap.style.transform = `translateY(${progress * 70}px)`;
     });
   }
 
