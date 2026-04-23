@@ -20,15 +20,8 @@ const { specialty, summary } = Astro.props;
       <img
         src="/logo-thirteengames.png"
         alt="Thirteen Games Logo"
-        class="h-56 md:h-72 w-auto drop-shadow-2xl mb-6"
+        class="w-[82vw] md:w-[68vw] max-w-4xl drop-shadow-2xl"
       />
-      <p class="glitch-wrapper font-serif text-2xl font-bold text-white sm:text-3xl md:text-4xl tracking-wider">
-        <span id="typewriter-specialty" class="glitch-text inline-block drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]" data-text=""></span>
-        <span class="typewriter-cursor">|</span>
-      </p>
-      <p class="mt-4 text-sm text-neutral/50">
-        {summary}
-      </p>
     </div>
 
     <!-- Scroll indicator -->
@@ -157,6 +150,6 @@ const { specialty, summary } = Astro.props;
   const banner = document.getElementById('parallax-banner');
   window.addEventListener('scroll', () => {
     if (!banner) return;
-    banner.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+    banner.style.transform = `translateY(${window.scrollY * 0.55}px)`;
   }, { passive: true });
 </script>
