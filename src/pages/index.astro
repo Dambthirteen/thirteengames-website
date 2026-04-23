@@ -113,13 +113,16 @@ import "../styles/global.css";
   /* Parallax wrapper — moves via JS, no transition */
   .panel-bg-wrap {
     position: absolute;
-    inset: -11% 0;
+    inset: 0;
     will-change: transform;
   }
 
   .panel-bg {
+    position: absolute;
+    top: -10%;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 120%;
     object-fit: cover;
     object-position: center;
     transition: transform 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
