@@ -12,7 +12,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/me)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/projects/staged)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/projects/gamejams)",
-      "Bash(dir \"C:\\\\Users\\\\danij\\\\Documents\\\\GameJams\\\\jameGam\\\\thirteengames-website\\\\CLAUDE.md\")"
+      "Bash(dir \"C:\\\\Users\\\\danij\\\\Documents\\\\GameJams\\\\jameGam\\\\thirteengames-website\\\\CLAUDE.md\")",
+      "Bash(pnpm add *)"
     ]
   }
 }

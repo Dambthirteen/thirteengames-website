@@ -20,6 +20,9 @@ importers:
       '@fontsource/be-vietnam-pro':
         specifier: ^5.1.0
         version: 5.2.8
+      '@fontsource/boldonse':
+        specifier: ^5.2.4
+        version: 5.2.4
       '@fontsource/fraunces':
         specifier: ^5.2.9
         version: 5.2.9
@@ -298,6 +301,9 @@ packages:
 
   '@fontsource/be-vietnam-pro@5.2.8':
     resolution: {integrity: sha512-lqTtfpkAy0GdFH0fqwR0sW4VP+3CNGaQV6SpW2TSZaNmixZMlou+2dp5ErGidrS1MPiDDPfPbfW2i358PVFLZA==}
+
+  '@fontsource/boldonse@5.2.4':
+    resolution: {integrity: sha512-lQ1G54LKtnXDdmTY3F6TEnn3husTQ4EkAJcAfG8T/M98WZhG4stgvr8fA5drv/tbZP0ij+mU7iqtvqCjy4/JOQ==}
 
   '@fontsource/fraunces@5.2.9':
     resolution: {integrity: sha512-XDzuddBtoC7BZgZdBn6b7hsFZY2+V1hgN7yca5fBTKuHjb/lOd45a0Ji8dTUgFhPoL7RdGupo+bC2BFSt6UH8Q==}
@@ -2382,6 +2388,8 @@ snapshots:
   '@fontsource-variable/gabarito@5.2.8': {}
 
   '@fontsource/be-vietnam-pro@5.2.8': {}
+
+  '@fontsource/boldonse@5.2.4': {}
 
   '@fontsource/fraunces@5.2.9': {}
 
