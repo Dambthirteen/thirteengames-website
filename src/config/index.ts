@@ -10,13 +10,15 @@ export const SITE_CONFIG: SiteConfig = {
     text: "Projects",
     href: "/#projects",
     children: [
-      { text: "You should choose", href: "/projects/you-should-choose" },
+      { text: "You Should Choose", href: "/projects/you-should-choose" },
       { text: "Simple Light Flicker", href: "/projects/simple-light-flicker" },
       { text: "Staged", href: "/projects/staged" },
       { text: "Game Jams", href: "/projects/gamejams" },
     ],
   },
-  { text: "About Me", href: "/me" },
+  { text: "You Should Choose", href: "/projects/you-should-choose" },
+  { text: "Discord", href: "https://discord.gg/6MUx8wUF" },
+  { text: "About", href: "/me" },
   ],
   socialLinks: [
     { text: "LinkedIn", href: "https://www.linkedin.com/in/dani-lipke-066a81372/" },
